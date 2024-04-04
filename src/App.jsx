@@ -1,23 +1,17 @@
 import { useState, useEffect } from 'react';
+import PostList from './components/PostList';
 
 function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/data')
+    fetch('http://localhost:3000/${endpoint}')
       .then((response) => response.json())
-      .then((data) => setData(data));
-  }, []);
+      .then((data) => setData(data.data.children));
+  }, [endpoint]);
 
   if (!data) return null;
-
-  return (
-    <ol>
-      {data.data.children.map((child) => (
-        <li>{child.data.title}</li>
-      ))}
-    </ol>
-  );
+  else return <PostList posts={data} />;
 }
 
 export default App;
