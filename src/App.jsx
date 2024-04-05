@@ -7,6 +7,15 @@ import SelectForm from './components/SelectForm';
 function App() {
   const [userInput, setUserInput] = useState(null);
 
+  const formData = [
+    'r/javascript',
+    'r/node',
+    'r/programming',
+    'r/reactjs',
+    'r/ubuntuserver',
+    'r/webdev',
+  ];
+
   const {
     data: posts,
     isLoading,
@@ -29,7 +38,7 @@ function App() {
   return (
     <div id='app'>
       <header id='header'>
-        <SelectForm onSelect={setUserInput} />
+        <SelectForm onSelect={setUserInput} formData={formData} />
       </header>
       {userInput ? content : null}
     </div>
