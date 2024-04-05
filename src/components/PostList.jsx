@@ -2,11 +2,11 @@ import React from 'react';
 import Post from './Post';
 
 const PostList = ({ posts }) => (
-  <ol>
+  <ul>
     {posts.map((post) => (
       <Post key={post.data.id} data={post.data} />
     ))}
-  </ol>
+  </ul>
 );
 
 export default PostList;
