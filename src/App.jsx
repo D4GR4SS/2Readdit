@@ -1,20 +1,21 @@
 import { useState } from 'react';
 import { useGetDataQuery } from './api/apiSlice';
 import './App.css';
+import logo from './assets/reddit.svg';
 import PostList from './components/PostList';
 import SelectForm from './components/SelectForm';
 
-function App() {
-  const [userInput, setUserInput] = useState(null);
+const formData = [
+  'r/javascript',
+  'r/node',
+  'r/programming',
+  'r/reactjs',
+  'r/ubuntuserver',
+  'r/webdev',
+];
 
-  const formData = [
-    'r/javascript',
-    'r/node',
-    'r/programming',
-    'r/reactjs',
-    'r/ubuntuserver',
-    'r/webdev',
-  ];
+function App() {
+  const [userInput, setUserInput] = useState('r/popular');
 
   const {
     data: posts,
@@ -38,6 +39,7 @@ function App() {
   return (
     <div id='app'>
       <header id='header'>
+        <img height='60px' width='60px' src={logo} alt='reddit logo' />
         <SelectForm onSelect={setUserInput} formData={formData} />
       </header>
       {userInput ? content : null}
