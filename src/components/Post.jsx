@@ -1,25 +1,59 @@
-import React from 'react';
+import { Card, CardContent, CardHeader } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import CommentIcon from '@mui/icons-material/Comment';
 
-const Post = ({ data }) => {
-  const { title, author, selftext, score, url_overridden_by_dest } = data;
+const PostTitle = ({ title, score, num_comments }) => (
+  <div className='post-title'>
+    <div className='icons'>
+      <span className='icon'>
+        <FavoriteIcon color={'secondary'} />
+        {score}
+      </span>
+      <span className='icon'>
+        <CommentIcon />
+        {num_comments}
+      </span>
+    </div>
+    {title}
+  </div>
+);
 
-  const onClick = (url) => {
-    console.log('User clicked:', url);
-  };
+const Post = ({ data, kind, onClick }) => {
+  const {
+    title,
+    author,
+    selftext,
+    body,
+    score,
+    num_comments,
+    url_overridden_by_dest,
+  } = data;
 
   return (
     <li className='post' onClick={() => onClick(data.url)}>
-      <h4>Posted by: {author}</h4>
-      <h2>{title}</h2>
-      <p>{selftext.slice(0, 400)}</p>
-      {data.is_video ? (
-        <video width='400' controls>
-          <source src={data.media.reddit_video.scrubber_media_url} />
-        </video>
-      ) : (
-        <a>{url_overridden_by_dest}</a>
-      )}
-      <h4>Score: {score}</h4>
+      <Card variant='elevation' elevation={4} sx={{ margin: '1.15em 4.5em' }}>
+        <CardHeader
+          title={
+            <PostTitle
+              title={title}
+              score={score}
+              num_comments={num_comments}
+            />
+          }
+          subheader={`Posted by: ${author}`}
+          sx={{ bgcolor: 'lightblue' }}
+        ></CardHeader>
+        <CardContent>
+          {kind === 't3' ? <p>{selftext.slice(0, 400)}</p> : <p>{body}</p>}
+          {data.is_video ? (
+            <video width='400' controls>
+              <source src={data.media.reddit_video.scrubber_media_url} />
+            </video>
+          ) : (
+            <a>{url_overridden_by_dest}</a>
+          )}
+        </CardContent>
+      </Card>
     </li>
   );
 };
@@ -27,3 +61,4 @@ const Post = ({ data }) => {
 export default Post;
 
 // TODO: Cercare un modo migliore per il link media data.media.reddit_video.scrubber_media_url
+// TODO: Creare un componente separato per il PostTitle
