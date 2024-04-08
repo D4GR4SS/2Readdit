@@ -1,3 +1,4 @@
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CommentIcon from '@mui/icons-material/Comment';
@@ -18,7 +19,19 @@ const PostTitle = ({ title, score, num_comments }) => (
   </div>
 );
 
-const Post = ({ data, kind, onClick }) => {
+const Post = ({ data, kind, replies }) => {
+  const children = replies?.data?.children || [];
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const onClick = (URI) => {
+    const pathname = URI.slice(0, -1);
+    if (pathname !== location.pathname) {
+      navigate(pathname);
+    }
+  };
+
   const {
     title,
     author,
@@ -30,8 +43,8 @@ const Post = ({ data, kind, onClick }) => {
   } = data;
 
   return (
-    <li className='post' onClick={() => onClick(data.url)}>
-      <Card variant='elevation' elevation={4} sx={{ margin: '1.15em 4.5em' }}>
+    <li className='post' onClick={() => onClick(data.permalink)}>
+      <Card variant='elevation' elevation={4}>
         <CardHeader
           title={
             <PostTitle
@@ -50,10 +63,22 @@ const Post = ({ data, kind, onClick }) => {
               <source src={data.media.reddit_video.scrubber_media_url} />
             </video>
           ) : (
-            <a>{url_overridden_by_dest}</a>
+            <a target='_blank' href={url_overridden_by_dest}>
+              {url_overridden_by_dest}
+            </a>
           )}
         </CardContent>
       </Card>
+      <ul id='reply-list'>
+        {children.map((post) => (
+          <Post
+            key={post.data.id}
+            data={post.data}
+            kind={post.kind}
+            replies={post.kind === 't1' ? post.data.replies : null}
+          />
+        ))}
+      </ul>
     </li>
   );
 };

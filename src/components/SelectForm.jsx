@@ -1,40 +1,26 @@
-import { useState } from 'react';
-import { FormGroup, Select, MenuItem, Button, InputLabel } from '@mui/material';
+import React from 'react';
+import { FormGroup, Select, MenuItem, Button } from '@mui/material';
 
-const SelectForm = ({ onSelect, formData }) => {
-  const [value, setValue] = useState(0);
+const SelectForm = ({ formData }) => {
+  const [value, setValue] = React.useState(0);
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    onSelect(formData[value]);
-  };
-
-  const styles = {
-    labelStyles: {
-      color: '#fff',
-      marginRight: '0.6em',
-      fontSize: '23px;',
-    },
-    selectStyles: {
-      backgroundColor: '#fff',
-      marginRight: '1.6em',
-      height: '2.2em',
-    },
+  const selectStyles = {
+    backgroundColor: '#fff',
+    marginRight: '1.6em',
+    height: '2.2em',
   };
 
   return (
     <FormGroup row>
-      <InputLabel id='form-label' sx={styles.labelStyles}>
-        Select by topic:
-      </InputLabel>
       <Select
-        labelid='form-label'
+        id='select'
         value={value}
         onChange={handleChange}
-        sx={styles.selectStyles}
+        sx={selectStyles}
       >
         {formData.map((data, index) => (
           <MenuItem key={index} value={index}>
@@ -42,7 +28,7 @@ const SelectForm = ({ onSelect, formData }) => {
           </MenuItem>
         ))}
       </Select>
-      <Button variant='contained' onClick={handleSubmit}>
+      <Button variant='contained' href={`/${formData[value]}`}>
         Get New Posts
       </Button>
     </FormGroup>
