@@ -3,6 +3,7 @@ import logo from '../assets/reddit.svg';
 import SelectForm from './SelectForm';
 import { useGetTopSubredditsQuery } from '../api/apiSlice';
 import { Skeleton, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [formData, setFormData] = useState([]);
@@ -43,7 +44,9 @@ const Header = () => {
 
   return (
     <header id='header'>
-      <img height='40px' width='40px' src={logo} alt='reddit logo' />
+      <Link to='/'>
+        <img height='40px' width='40px' src={logo} alt='reddit logo' />
+      </Link>
       {formData.length > 0 && <SelectForm formData={formData} />}
     </header>
   );

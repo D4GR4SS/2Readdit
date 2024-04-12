@@ -1,5 +1,6 @@
 import { useGetPostDataQuery } from '../api/apiSlice';
 import { useParams } from 'react-router-dom';
+import { Skeleton, Typography } from '@mui/material';
 import Post from './Post';
 
 const PostDetail = () => {
@@ -16,12 +17,19 @@ const PostDetail = () => {
 
   let content;
   if (isLoading) {
-    content = <h2>Loading...</h2>;
+    content = (
+      <div style={{ margin: '20px', padding: '20px' }}>
+        <Skeleton variant='text' width={200} height={40} />
+        <Skeleton variant='rectangular' width={'100%'} height={200} />
+        <Skeleton variant='text' width={200} height={40} />
+        <Skeleton variant='rectangular' width={'100%'} height={200} />
+      </div>
+    );
   } else if (isError) {
-    content = <h2>{error.status}</h2>;
+    content = <Typography variant='h6'>Error: {error.message}</Typography>;
     console.log(error);
   } else if (!posts) {
-    content = <h2>DATA_ERROR: undefined</h2>;
+    content = <Typography variant='h6'>DATA_ERROR: undefined</Typography>;
   } else if (isSuccess) {
     content = (
       <ul id='post-list'>

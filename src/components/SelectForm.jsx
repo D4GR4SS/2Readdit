@@ -31,7 +31,7 @@ const SelectForm = ({ formData }) => {
         ))}
       </Select>
       <Button variant='contained' href={`/${formData[value]}`}>
-        Get New Posts
+        Get Posts
       </Button>
     </FormGroup>
   );

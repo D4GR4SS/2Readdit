@@ -1,26 +1,22 @@
+import React from 'react';
+import { Card, CardContent, CardHeader, Typography } from '@mui/material';
+import PostTitle from './PostTitle';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Card, CardContent, CardHeader } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import CommentIcon from '@mui/icons-material/Comment';
-
-const PostTitle = ({ title, score, num_comments }) => (
-  <div className='post-title'>
-    <div className='icons'>
-      <span className='icon'>
-        <FavoriteIcon color={'secondary'} />
-        {score}
-      </span>
-      <span className='icon'>
-        <CommentIcon />
-        {num_comments}
-      </span>
-    </div>
-    {title}
-  </div>
-);
 
 const Post = ({ data, kind, replies }) => {
   const children = replies?.data?.children || [];
+
+  const {
+    title,
+    author,
+    selftext,
+    body,
+    score,
+    num_comments,
+    is_video,
+    url_overridden_by_dest,
+    permalink,
+  } = data;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,38 +28,28 @@ const Post = ({ data, kind, replies }) => {
     }
   };
 
-  const {
-    title,
-    author,
-    selftext,
-    body,
-    score,
-    num_comments,
-    url_overridden_by_dest,
-  } = data;
-
   return (
-    <li className='post' onClick={() => onClick(data.permalink)}>
+    <li className='post' onClick={() => onClick(permalink)}>
       <Card variant='elevation' elevation={4}>
         <CardHeader
           title={
-            <PostTitle
-              title={title}
-              score={score}
-              num_comments={num_comments}
-            />
+            <PostTitle title={title} score={score} numComments={num_comments} />
           }
           subheader={`Posted by: ${author}`}
           sx={{ bgcolor: 'lightblue' }}
         ></CardHeader>
         <CardContent>
-          {kind === 't3' ? <p>{selftext.slice(0, 400)}</p> : <p>{body}</p>}
-          {data.is_video ? (
+          {kind === 't3' ? (
+            <Typography variant='body1'>{selftext.slice(0, 400)}</Typography>
+          ) : (
+            <Typography variant='body1'>{body}</Typography>
+          )}
+          {is_video ? (
             <video width='400' controls>
               <source src={data.media.reddit_video.scrubber_media_url} />
             </video>
           ) : (
-            <a target='_blank' href={url_overridden_by_dest}>
+            <a target='_blank' rel='noreferrer' href={url_overridden_by_dest}>
               {url_overridden_by_dest}
             </a>
           )}
@@ -84,6 +70,3 @@ const Post = ({ data, kind, replies }) => {
 };
 
 export default Post;
-
-// TODO: Cercare un modo migliore per il link media data.media.reddit_video.scrubber_media_url
-// TODO: Creare un componente separato per il PostTitle

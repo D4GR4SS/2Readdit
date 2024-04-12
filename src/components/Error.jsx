@@ -1,5 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import logo from '../assets/reddit.svg';
 
 const Error = () => {
   return (
@@ -7,14 +9,19 @@ const Error = () => {
       className='error-page'
       sx={{
         textAlign: 'center',
+        minHeight: '100vh',
         padding: '50px',
-        backgroundColor: 'lightblue',
+        color: 'var(--seasalt)',
+        backgroundColor: 'var(--blue)',
       }}
     >
-      <Typography variant='h4' component='h1'>
+      <Typography variant='h2' component='h1' sx={{ marginBottom: '40px' }}>
         404 - Not Found
       </Typography>
-      <Typography variant='h4' component='h1' sx={{ marginTop: '40px' }}>
+      <Link to='/'>
+        <img height='340px' width='340px' src={logo} alt='reddit logo' />
+      </Link>
+      <Typography variant='h2' component='h1' sx={{ marginTop: '40px' }}>
         Oops! An Error Has Occurred.
       </Typography>
     </Box>
