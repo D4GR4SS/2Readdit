@@ -1,18 +1,23 @@
 import React from 'react';
+import { Box, Typography } from '@mui/material';
 
 const Error = () => {
   return (
-    <div
+    <Box
       className='error-page'
-      style={{
+      sx={{
         textAlign: 'center',
         padding: '50px',
         backgroundColor: 'lightblue',
       }}
     >
-      {/* <img src="/sadface.jpeg" width="500px" alt="sad-face" /> */}
-      <h1 style={{ marginTop: '40px' }}>Oops! An Error Has Occurred.</h1>
-    </div>
+      <Typography variant='h4' component='h1'>
+        404 - Not Found
+      </Typography>
+      <Typography variant='h4' component='h1' sx={{ marginTop: '40px' }}>
+        Oops! An Error Has Occurred.
+      </Typography>
+    </Box>
   );
 };
 

@@ -1,9 +1,8 @@
-// Header.jsx
-
 import React, { useState } from 'react';
 import logo from '../assets/reddit.svg';
 import SelectForm from './SelectForm';
 import { useGetTopSubredditsQuery } from '../api/apiSlice';
+import { Skeleton, Typography } from '@mui/material';
 
 const Header = () => {
   const [formData, setFormData] = useState([]);
@@ -23,11 +22,23 @@ const Header = () => {
   }, [topSubreddits]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <header id='header'>
+        <Skeleton variant='circular' width={40} height={40} />
+        <Skeleton variant='text' width={200} />
+        <Skeleton variant='rectangular' width={150} height={40} />
+      </header>
+    );
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <header id='header'>
+        <Typography variant='h6' color='error'>
+          Error: {error.message}
+        </Typography>
+      </header>
+    );
   }
 
   return (
