@@ -1,3 +1,5 @@
+// apiSlice.js
+
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
@@ -10,6 +12,11 @@ export const apiSlice = createApi({
       query: (endpoint) => `/r/${endpoint}.json`,
       transformResponse: (response) => response.data.children,
     }),
+    getTopSubreddits: builder.query({
+      query: () => `subreddits.json?limit=10`,
+      transformResponse: (response) =>
+        response.data.children.map((subreddit) => subreddit.data.display_name),
+    }),
     getPostData: builder.query({
       query: (URI) => `/r/${URI}.json`,
       transformResponse: (response) => [
@@ -20,4 +27,8 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useGetDataQuery, useGetPostDataQuery } = apiSlice;
+export const {
+  useGetDataQuery,
+  useGetPostDataQuery,
+  useGetTopSubredditsQuery,
+} = apiSlice;

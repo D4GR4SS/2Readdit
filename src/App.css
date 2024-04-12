@@ -46,16 +46,32 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  padding: 10px;
-  padding-left: 60px;
-  display: flex;
+  display: flex; /* Maintain flex layout */
   align-items: center;
-  justify-content: space-around;
+  padding: 10px 20px; /* Adjust padding for better spacing */
   background: linear-gradient(90deg, #3d5266, #0f1011);
 }
 
+#header img {
+  height: 40px; /* Consistent logo size */
+  width: 40px;
+  margin-right: 20px; /* Spacing between logo and SelectForm */
+}
+
 #select {
-  width: 115px;
+  /* Assuming this refers to SelectForm component */
+  flex: 1; /* Allow SelectForm to grow and fill remaining space */
+}
+
+@media only screen and (min-width: 768px) {
+  /* Target screens wider than 768px */
+  #header {
+    justify-content: space-between; /* Align logo and SelectForm to opposite ends */
+  }
+
+  #select {
+    max-width: 250px; /* Set a maximum width for SelectForm on larger screens */
+  }
 }
 
 @media only screen and (max-width: 600px) {
