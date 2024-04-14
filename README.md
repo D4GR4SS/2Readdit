@@ -50,6 +50,4 @@ Feel free to explore the codebase to learn more about how 2Readdit works. Dive i
 
 Happy browsing with 2Readdit! 🚀
 
-```
-
-```
+[![Netlify Status](https://api.netlify.com/api/v1/badges/eb2d440b-3af1-4f1e-baeb-ea5cfd5f6166/deploy-status)](https://app.netlify.com/sites/2reddit/deploys)
