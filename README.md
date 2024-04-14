@@ -1,4 +1,3 @@
-```markdown
 # 2Readdit
 
 Welcome to 2Readdit - your gateway to the world of Reddit! This web application is your go-to destination for browsing Reddit content in a sleek and intuitive interface.
