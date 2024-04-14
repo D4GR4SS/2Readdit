@@ -1,4 +1,3 @@
-```markdown
 # 2Readdit
 
 Welcome to 2Readdit - your gateway to the world of Reddit! This web application is your go-to destination for browsing Reddit content in a sleek and intuitive interface.
@@ -50,4 +49,7 @@ Contributions to 2Readdit are welcome! If you have ideas for improvements or new
 Feel free to explore the codebase to learn more about how 2Readdit works. Dive into the components, Redux store, and API integration to see how everything comes together.
 
 Happy browsing with 2Readdit! 🚀
+
+```
+
 ```
